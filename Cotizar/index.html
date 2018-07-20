@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Xgou Technology Inc.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
+
+
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+
+
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+    <!--Barra de navegación-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+                <a class="navbar-brand" href="../index.html">Xgou Technology</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--Cuerpo de la búsqueda-->
+    <div class="jumbotron text-center imag-center">
+        <img id="imagen" class="img-responsive" src="xgou.png" width="280" height="180">
+        <h4>Cada paso nos acerca a ti! <br><strong>Supply Chain Management</strong>
+        </h4>
+        <form action="#">
+            <div class="input-group">
+                <input autocomplete="off" type="text" class="form-control" placeholder="Ingresar el código de su pedido - SERPOST PERÚ" name="search">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--Insertando Google Maps a la plataforma-->
+    <div id="googleMap" style="height:500px;width:100%;"></div>
+
+    <h3> Lo que dicen nuestros amigos</h3>
+    <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <h4>"Esta empresa es el mejor. Estamos feliz con los resultados!"<br><span>Michael Roe, Vice President, Spend Box</span></h4>
+            </div>
+            <div class="item">
+                <h4>"Una palabra... WOW!!"<br><span>John Doe, Ventas, Rep Inc</span></h4>
+            </div>
+            <div class="item">
+                <h4>"No podría... estar más feliz con esta compañia"<br><span>Chandler Bing, Actor, FriendsAlot</span></h4>
+            </div>
+            <div class="item">
+                <h4>"Realmente fascinante, es una compañia, rápida, segura y de confianza"<br><span>John Mendoza, Ingeniero, Xgou Technology</span></h4>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+    <script type="text/javascript">
+        function myMap() {
+            var myhome = new google.maps.LatLng(-12.017733, -77.051773);
+            var parqueTrabajo = new google.maps.LatLng(-12.029505, -77.044241);
+            var plazaDosMayo = new google.maps.LatLng(-12.046785, -77.042685);
+            var plazaBolognesi = new google.maps.LatLng(-12.060686, -77.041758);
+
+            var mapProp = {
+                center: myhome,
+                zoom: 13,
+                scrollwheel: true,
+                draggable: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP //tipos de mapa: SATELLITE, HYDRID, TERRAIR
+            };
+
+            var mapCanvas = document.getElementById('googleMap');
+            var mapMostrar = new google.maps.Map(mapCanvas, mapProp);
+
+            var marker = new google.maps.Marker({
+                position: myhome,
+                animation: google.maps.Animation.BOUNCE,
+                icon: 'iconPosicion.png'
+            });
+            marker.setMap(mapMostrar);
+
+            var trazarTrayectoria = new google.maps.Polyline({
+                path: [myhome, parqueTrabajo, plazaDosMayo, plazaBolognesi], //Puntos principales a unir
+                strokeColor: "#1C2833", //Color de la línea
+                strokeOpacity: 2, //[>=0 y <=1]
+                strokeWeight: 3.5, //Grosor de la línea
+                editable: true //Que el usuario pueda editar el recorrido
+            });
+            trazarTrayectoria.setMap(mapMostrar);
+
+            var trazarRegion = new google.maps.Polygon({
+                path: [myhome, parqueTrabajo, plazaBolognesi],
+                strokeColor: "#2980B9", //Color de la línea que marca la región 
+                strokeOpacity: 0.8, //Opacidad de la línea que rodea la región [0-1]
+                strokeWeight: 3, //Ancho de la línea que rodea el área
+                fillColor: "#E74C3C", //Área de la región marcada. 
+                fillOpacity: 0.4, //Opacidad del color de la región sombreada [0-1]
+                editable: true //Editar el área de la región. 
+            });
+            trazarRegion.setMap(mapMostrar);
+
+            var radioAtencion = new google.maps.Circle({
+                center: myhome,
+                radius: 500, //Está en metros
+                strokeColor: "##E74C3C",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "#2ECC71",
+                fillOpacity: 0.4,
+                editable: true
+            });
+            radioAtencion.setMap(mapMostrar);
+
+            var contentString = '<div id="content">' +
+                '<div id="siteNotice">' +
+                '</div>' +
+                '<h4 id="firstHeading" class="firstHeading">Xgou Logistics Technology</h4>' +
+                '<div id="bodyContent">' +
+                '<p><b>Info</b>: Hola estimado visitante reciba el saludo cordial de parte' +
+                'de la empresa tecnológica <b>Xgou Logistics</b>. ' +
+                'ESTAMOS TRABAJANDO CADA DÍA PARA ENTREGARTE MEJORES SERVICIOS.<br> ' +
+                'ESPERAMOS SU COMPRENSIÓN Y FAVOR DE PEDIRLE QUE NOS SIGA EN NUESTRAS REDES SOCIALES.<br> ' +
+                'Atentamente: ' +
+                'Equipo de desarrollo tecnológico de Xgou Logistics.</p>' +
+                '<p>Nuestra Página Web:<a href="https://johnmendoza.000webhostapp.com/index.html">' +
+                'Xgou Logistics</a> ' +
+                '(Publicado el 19 de julio de 2018).</p>' +
+                '</div>' +
+                '</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            infowindow.open(mapMostrar, marker); //Colocar como argumento la función mostrar y un marker. 
+
+            // Zoom to 9 when clicking on marker
+            google.maps.event.addListener(marker, 'click', function() {
+                map.setZoom(9);
+                map.setCenter(marker.getPosition());
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+                var infowindow = new google.maps.InfoWindow({
+                    content: "Hello World!"
+                });
+                infowindow.open(map, marker);
+            });
+
+        };
+    </script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACnDoA_24aUApyAR-iFzRPTOR-bj1MYyw&callback=myMap"></script>
+
+
+</body>
